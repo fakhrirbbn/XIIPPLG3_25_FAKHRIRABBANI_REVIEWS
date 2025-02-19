@@ -14,7 +14,7 @@ router.get('/categories', (req, res) => {
 }),
   router.post('/categories', (req, res) => {
     const { nama } = req.body;
-    if (nama) {
+    if (!nama) {
       return res.status(400).json({ error: 'Nama is required' }); // Validasi rating
     }
 
@@ -24,6 +24,34 @@ router.get('/categories', (req, res) => {
       }
       res.status(201).json({ message: 'Ulasan berhasil ditambahkan.', id: result.insertId }); // Kirim respons sukses dengan ID ulasan
     });
+  }),
+  router.put('/categories/:id', (req, res) => {
+    const { nama } = req.body;
+    const { id } = req.params;
+
+    if (!nama) {
+      return res.status(400).json({ error: 'Nama is required' });
+    }
+
+    db.query('UPDATE kategori SET nama = ? WHERE id = ?', [nama, id], (err, results) => {
+      if (err) {
+        res.status(500).json({ error: err.message });
+      } else {
+        res.status(201).json({ message: 'Category Updated', id, nama });
+      }
+    });
   });
+
+router.delete('/categories/:id', (req, res) => {
+  const { id } = req.params;
+
+  db.query('DELETE FROM kategori WHERE id = ?', [id], (err, results) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+    } else {
+      res.status(201).json({ message: 'Category Deleted', id });
+    }
+  });
+});
 
 module.exports = router;

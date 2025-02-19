@@ -5,7 +5,7 @@ const db = mysql.createConnection({
   host: '127.0.0.1', // Alamat host database (sesuaikan jika menggunakan server lain)
   user: 'root', // Nama pengguna MySQL (gantilah jika menggunakan user lain)
   password: '', // Password MySQL (kosong jika tidak ada password)
-  database: 'perpustakan', // Nama database yang digunakan
+  database: 'perpustakaan', // Nama database yang digunakan
 });
 
 // Menghubungkan ke database
