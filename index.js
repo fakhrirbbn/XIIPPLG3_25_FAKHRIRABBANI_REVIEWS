@@ -3,6 +3,7 @@ const app = express(); // Inisialisasi aplikasi Express
 
 const userreviews = require('./router/review'); // Import router untuk endpoint reviews
 const categoriesroutes = require('./router/category')
+const bookrouter = require('./router/book')
 
 const port = 3000; // Menentukan port yang akan digunakan oleh server
 
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
 // Middleware untuk menggunakan router yang berisi endpoint terkait ulasan (reviews)
 app.use(userreviews);
 app.use(categoriesroutes)
+app.use(bookrouter)
 
 // Menjalankan server pada port yang telah ditentukan
 app.listen(port, () => {
